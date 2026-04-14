@@ -1,101 +1,54 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Project Information -->
     <groupId>com.example</groupId>
     <artifactId>MyMavenFireFox</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
-    <name>MyMavenFireFox</name>
-    <url>http://maven.apache.org</url>
-
-    <!-- Parent POM (use appropriate version for Spring Boot if required, or remove it if unnecessary) -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version> <!-- Update version or remove if you're not using Spring Boot -->
-        <relativePath/> <!-- Lookup parent from repository -->
-    </parent>
-
-    <!-- Properties for Java version -->
     <properties>
-        <java.version>11</java.version> <!-- Changed to Java 11 for modern compatibility -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
-    <!-- Dependencies -->
     <dependencies>
-        <!-- WebDriverManager for managing drivers automatically -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.3.0</version> <!-- Latest WebDriverManager version -->
-        </dependency>
 
-        <!-- Selenium dependency for WebDriver usage -->
+        <!-- Selenium 4 -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.4.0</version> <!-- Latest stable Selenium 4 version -->
+            <version>4.4.0</version>
         </dependency>
 
-        <!-- JUnit 5 for testing (if needed for unit tests) -->
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version> <!-- Latest JUnit 5 version -->
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Maven Surefire Plugin for running tests -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.22.2</version> <!-- This plugin runs tests during Maven build -->
-        </dependency>
     </dependencies>
 
-    <!-- Build Information -->
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin for compiling Java code -->
+
+            <!-- Compiler Plugin -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
             </plugin>
 
-            <!-- Maven Jar Plugin for packaging the project into a JAR -->
+            <!-- Surefire Plugin for running tests -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
+
         </plugins>
     </build>
 
-    <!-- Repositories (Optional, only if you use custom repositories) -->
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-    </repositories>
-
-    <!-- Profiles (optional, for different environments) -->
-    <profiles>
-        <profile>
-            <id>production</id>
-            <properties>
-                <java.version>11</java.version> <!-- Specific Java version for production -->
-            </properties>
-        </profile>
-    </profiles>
 </project>
