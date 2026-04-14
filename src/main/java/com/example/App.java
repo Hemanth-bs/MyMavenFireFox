@@ -10,16 +10,24 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import java.time.Duration;
 
 public class App {
 
     public static void main(String[] args) throws InterruptedException {
 
-        // ❌ Removed geckodriver path
+        // ✅ Setup GeckoDriver automatically
+        WebDriverManager.firefoxdriver().setup();
 
+        // ✅ Set Firefox options
         FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--headless");   // ✅ IMPORTANT for Jenkins
+        options.addArguments("--headless");
+
+        // ✅ IMPORTANT: Set correct binary path (fix for Jenkins error)
+        options.setBinary("/usr/bin/firefox-esr"); 
+        // Change path if different: run `which firefox` in server
 
         WebDriver driver = new FirefoxDriver(options);
 
@@ -28,14 +36,17 @@ public class App {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         Actions actions = new Actions(driver);
 
+        // ------------------ SauceDemo ------------------
         driver.get("https://www.saucedemo.com/");
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
         driver.findElement(By.id("password")).sendKeys("secret_sauce");
         driver.findElement(By.id("login-button")).click();
         System.out.println("SauceDemo login successful");
 
+        // ------------------ Automation Exercise ------------------
         driver.switchTo().newWindow(WindowType.TAB);
         driver.get("https://automationexercise.com/products");
+
         driver.findElement(By.id("search_product")).sendKeys("Men Tshirt");
         driver.findElement(By.id("submit_search")).click();
 
@@ -53,25 +64,22 @@ public class App {
         );
 
         ((org.openqa.selenium.JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView(true);", viewCart);
-        ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].click();", viewCart);
 
         System.out.println("Automation Exercise product added to cart");
 
+        // ------------------ Practice Test Automation ------------------
         driver.switchTo().newWindow(WindowType.TAB);
         driver.get("https://practicetestautomation.com/practice-test-login/");
 
-        Thread.sleep(2000);
-
-        driver.findElement(By.id("username")).sendKeys("student");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("username"))).sendKeys("student");
         driver.findElement(By.id("password")).sendKeys("Password123");
         driver.findElement(By.id("submit")).click();
 
         System.out.println("Practice Test Automation login successful");
 
-        Thread.sleep(5000);
-
+        // ------------------ Cleanup ------------------
+        Thread.sleep(3000);
         driver.quit();
     }
 }
