@@ -16,9 +16,11 @@ public class App {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.setProperty("webdriver.gecko.driver", "geckodriver");
+        // ❌ Removed geckodriver path
 
         FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--headless");   // ✅ IMPORTANT for Jenkins
+
         WebDriver driver = new FirefoxDriver(options);
 
         driver.manage().window().setSize(new org.openqa.selenium.Dimension(1920, 1080));
