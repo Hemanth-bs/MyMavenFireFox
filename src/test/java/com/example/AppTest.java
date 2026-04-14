@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.WindowType;
 
-public class App {
+public class AppTest {
 
     public static void main(String[] args) {
 
