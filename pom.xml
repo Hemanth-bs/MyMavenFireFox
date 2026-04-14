@@ -1,36 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-<modelVersion>4.0.0</modelVersion>
+    <!-- Project Information -->
+    <groupId>com.example</groupId>
+    <artifactId>MyMavenFireFox</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-<groupId>com.example</groupId>
-<artifactId>MyMavenFireFox</artifactId>
-<version>1.0-SNAPSHOT</version>
+    <name>MyMavenFireFox</name>
+    <url>http://maven.apache.org</url>
 
-<properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-</properties>
+    <!-- Parent POM (if using Spring Boot or other frameworks, update as required) -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.4</version> <!-- Use the appropriate version -->
+        <relativePath/> <!-- Lookup parent from repository -->
+    </parent>
 
-<dependencies>
+    <!-- Properties -->
+    <properties>
+        <java.version>1.8</java.version> <!-- or the version you are using -->
+    </properties>
 
-    <!-- Selenium -->
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>4.21.0</version>
-    </dependency>
+    <!-- Dependencies -->
+    <dependencies>
+        <!-- WebDriverManager dependency -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.0</version> <!-- You can use the latest version -->
+        </dependency>
 
-    <!-- JUnit (FIX for your error) -->
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.13.2</version>
-        <scope>test</scope>
-    </dependency>
+        <!-- Add other dependencies as per your project needs -->
+        <!-- Example: Selenium WebDriver -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version> <!-- Replace with a newer version if needed -->
+        </dependency>
 
-</dependencies>
+        <!-- Example: JUnit for Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Example: Maven Surefire Plugin (for running tests) -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.2</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Build Information -->
+    <build>
+        <plugins>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Jar Plugin for packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+
+            <!-- Other plugins can be added here -->
+        </plugins>
+    </build>
+
+    <!-- Repositories (Optional, if you use any custom repositories) -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
 
 </project>
