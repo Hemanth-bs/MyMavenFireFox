@@ -1,47 +1,34 @@
 pipeline {
-    agent any  // Use any available agent
-
-    tools {
-        maven 'Maven'  // Ensure this matches the name configured in Jenkins
-    }
+    agent any
+    
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Hemanth-bs/MyMavenFireFox.git'
+                git 'https://github.com/Hemanth-bs/MyMavenFireFox.git'
             }
         }
-
+        
         stage('Build') {
             steps {
-                sh 'mvn clean package'  // Run Maven build
+                script {
+                    sh 'mvn clean package'
+                }
             }
         }
 
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                sh 'mvn test'  // Run unit tests
+                script {
+                    // Ensure FirefoxDriver works
+                    sh 'java -cp target/your-artifact.jar com.example.App'
+                }
             }
         }
-
-        
-        
-       
-        stage('Run Application') {
-            steps {
-                // Start the JAR application
-                sh 'mvn exec:java -Dexec.mainClass="com.example.App"'
-            }
-        }
-
-        
     }
-
+    
     post {
-        success {
-            echo 'Build and deployment successful!'
-        }
-        failure {
-            echo 'Build failed!'
+        always {
+            cleanWs()
         }
     }
 }
