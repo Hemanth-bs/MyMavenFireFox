@@ -1,13 +1,14 @@
 pipeline {
     agent any
-    
+
     stages {
-        stage('Checkout') {
+        stage('Checkout SCM') {
             steps {
-                git 'https://github.com/Hemanth-bs/MyMavenFireFox.git'
+                // Update to the correct branch name (main instead of master)
+                git branch: 'main', url: 'https://github.com/Hemanth-bs/MyMavenFireFox.git'
             }
         }
-        
+
         stage('Build') {
             steps {
                 script {
