@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Ensure FirefoxDriver works
-                    'mvn exec:java -Dexec.mainClass="com.example.App"'           
+                    'mvn exec:java'           
                 }
             }
         }
