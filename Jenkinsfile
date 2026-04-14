@@ -21,8 +21,7 @@ pipeline {
             steps {
                 script {
                     // Ensure FirefoxDriver works
-                    sh 'java -cp target/your-artifact.jar com.example.App'
-                }
+                    java -cp target/MyMavenFireFox-1.0-SNAPSHOT.jar com.example.App                }
             }
         }
     }
